@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    container_name: s2sMerchantNew
+    image: s2simage
+    restart: always
+    ports:
+      - 8001:80
+      - 8334:443
+    volumes:
+      - ../web:/var/www/html
+      - ./certs/certificate.crt:/etc/ssl/certs/certifiate.crt
+      - ./certs/cert/private.key:/etc/ssl/private/private.key 
+      # - ./certs/certificate.crt:/etc/apache2/ssl/certifiate.crt
+      # - ./certs/cert/private.key:/etc/apache2/ssl/private.key
+    extra_hosts:
+      - "remotedb.host: 172.20.176.1"
+      - "remoteDB: 172.20.176.1"
+    environment:
+      DB_HOST: 172.20.176.1
